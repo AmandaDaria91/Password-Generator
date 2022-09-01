@@ -54,6 +54,7 @@ function generatePassword () {
 
 // Write password to the #password input
 function writePassword() {
+  // TODO: connect functions and double check password generated data
   var password = generatePassword();
   var passwordText = document.querySelector("#password");
 
