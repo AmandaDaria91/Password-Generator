@@ -25,14 +25,14 @@ No installation or authentication required to view the webpage.
 
 ## Usage
 
-[Link to deployed site](https://www.github.com)
+[Link to deployed site](https://amandadaria91.github.io/password-generator/)
 
-![This is a screenshot of the password generator webpage.](assets/images/horiseon-screenshot-1.jpg)
+![This is a screenshot of the password generator webpage.](Assets/screenshot-deployed.png)
 
 
 ## Credits
 
-@UWA-Bootcamp provided starter code of both HTML and CSS, asset, and instruction into the foundational knowledge of HTML, CSS, and JavaScript. 
+@UWA-Bootcamp provided code of HTML, CSS, and starter code for JavaScript. @UWA-Bootcamp also provided instruction into the foundational knowledge of HTML, CSS, and JavaScript. 
 
 
 ## License
