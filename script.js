@@ -1,6 +1,15 @@
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
 
+//declaring variable defaults
+let password;
+var userChoiceSpecChar;
+var userChoiceLowerChar;
+var userChoiceUpperChar;
+var userChoiceNumber;
+var userChoiceLength;
+
+
 // arrays store potential characters to be generated for the password
 var  specialCharOptions = ["!", "@", "#", "$", "%", "&", "*", ".", "_"];
 var  letterOptionsLower = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
@@ -13,7 +22,7 @@ let possibleCharOptions = [];
 // generatePassword function
 function generatePassword () {
   //prompt user for length of PW
-  var userChoiceLength = parseInt(prompt("How long would you like your password to be?"));
+  userChoiceLength = parseInt(prompt("How long would you like your password to be?"));
   //verify user selects length between 8 and 128
   if (userChoiceLength < 8 || 128 < userChoiceLength) {
     alert("Only passwords between the 8 - 128 can be generated");
@@ -27,30 +36,29 @@ function generatePassword () {
   }
 
   else {
-    
     //prompt user for special char inclusion using okay or cancel
-    var userChoiceSpecChar = confirm("Would you like special characters included?");
+    userChoiceSpecChar = confirm("Would you like special characters included?");
     // if user selects Okay to special characters than use specialCharOptions array and add elements into empty array
     if (userChoiceSpecChar === true) {
       possibleCharOptions = possibleCharOptions.concat(specialCharOptions);
     }
 
     //prompt user for lower char inclusion using okay or cancel
-    var userChoiceLowerChar = confirm("Would you like lowercase letters included?");
+    userChoiceLowerChar = confirm("Would you like lowercase letters included?");
     // if user selects Okay to lower than use letterOptions array and add elements into empty array
     if (userChoiceLowerChar === true) {
       possibleCharOptions = possibleCharOptions.concat(letterOptionsLower);
     }
 
     //prompt user for upper char inclusion using okay or cancel
-    var userChoiceUpperChar = confirm("Would you like uppercase letters included?");
+    userChoiceUpperChar = confirm("Would you like uppercase letters included?");
     //if user selects Okay to Upper than use letterOptions array and change value to upper and add elements into empty array
     if (userChoiceUpperChar === true) {
       possibleCharOptions = possibleCharOptions.concat(letterOptionsUpper);
     }
 
     //prompt user for upper char inclusion using okay or cancel
-    var userChoiceNumber = confirm("Would you like numbers included?");
+    userChoiceNumber = confirm("Would you like numbers included?");
     // if user selects Okay to special characters than use specialCharOptions array and add elements into empty array
     if (userChoiceNumber === true) {
       possibleCharOptions = possibleCharOptions.concat(numberOptions);
@@ -84,7 +92,12 @@ function writePassword() {
   var password = generatePassword();
   var passwordText = document.querySelector("#password");
   passwordText.value = password;
-
+  //reset defaults
+  userChoiceSpecChar = null;
+  userChoiceLowerChar = null;
+  userChoiceUpperChar = null;
+  userChoiceNumber = null;
+  userChoiceLength = 0;
 }
 
 generateBtn.addEventListener("click", writePassword);
