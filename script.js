@@ -1,67 +1,90 @@
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
 
-//TODO: create an object to store the arrays for generate passwords to be generated from
-var options = {
-  specialCharOptions: ["!", "@", "#", "$", "%", "&", "*", ".", "_"],
-  letterOptions: ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"],
-  numberOptions: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"], 
-}
+// arrays store potential characters to be generated for the password
+var  specialCharOptions = ["!", "@", "#", "$", "%", "&", "*", ".", "_"];
+var  letterOptionsLower = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+var  letterOptionsUpper = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
+var  numberOptions = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]; 
+
+// TODO: empty array for possible characters
+let possibleCharOptions = [];
 
 // TODO: generatePassword function
 function generatePassword () {
   //prompt user for length of PW
-  var userChoiceLength = window.prompt("How long would you like your password to be?");
+  var userChoiceLength = parseInt(prompt("How long would you like your password to be?"));
   //verify user selects length between 8 and 128
   if (userChoiceLength < 8 || 128 < userChoiceLength) {
-    window.alert("Only passwords between the 8 - 128 can be generated");
+    alert("Only passwords between the 8 - 128 can be generated");
+    return;
+  }
+
+  //verify input is an integer
+  if (!Number.isInteger(userChoiceLength)) {
+    alert("Length must be an integer!");
     return;
   }
 
   //prompt user for special char inclusion using okay or cancel
-  var userChoiceSpecChar = window.confirm("Would you like special characters included?");
+  var userChoiceSpecChar = confirm("Would you like special characters included?");
 
   //prompt user for lower char inclusion using okay or cancel
-  var userChoiceLowerChar = window.confirm("Would you like lowercase letters included?");
+  var userChoiceLowerChar = confirm("Would you like lowercase letters included?");
 
   //prompt user for upper char inclusion using okay or cancel
-  var userChoiceUpperChar = window.confirm("Would you like uppercase letters included?");
+  var userChoiceUpperChar = confirm("Would you like uppercase letters included?");
 
   //prompt user for upper char inclusion using okay or cancel
-  var userChoiceNumber = window.confirm("Would you like numbers included?");
-
-  // TODO: if user selects Okay to Upper than use letterOptions array and change value to upper
-  if (userChoiceUpperChar) {
-    options.userChoiceUpperChar.upperCase();
-  }
+  var userChoiceNumber = confirm("Would you like numbers included?");
 
   //TODO: user must select one character type 
-  if (!userChoiceSpecChar || !userChoiceLowerChar || !userChoiceUpperChar || !userChoiceNumber) {
-    window.alert("You must select one character type");
+  if (!userChoiceSpecChar && !userChoiceLowerChar && !userChoiceUpperChar && !userChoiceNumber) {
+    alert("You must select one character type");
     return;
   }
 
-  // //TODO: for loop the amount of times for the length specified to randomly select between the 3 arrays
-  // for (var i = 0; i =< userChoiceLength.length; i++) {
-  //   var randomPass = specialCharOptions[Math.floor(Math.random() * userChoiceSpecChar)];
-  //   var randomPass = userChoiceLowerChar[Math.floor(Math.random() * userChoiceLowerChar)];
-  //   var randomPass = userChoiceUpperChar[Math.floor(Math.random() * userChoiceUpperChar)];
-  //   var randomPass = Math.floor(Math.random() * userChoiceNumber);
-  // }
-  // return randomPass;
+  // TODO: if user selects Okay to special characters than use specialCharOptions array and add elements into empty array
+  if (userChoiceSpecChar) {
+    possibleCharOptions = possibleCharOptions.concat(specialCharOptions);
+  }
 
+  // TODO: if user selects Okay to lower than use letterOptions array and add elements into empty array
+  if (userChoiceLowerChar) {
+    possibleCharOptions = possibleCharOptions.concat(letterOptionsLower);
+  }
+
+  // TODO: if user selects Okay to Upper than use letterOptions array and change value to upper and add elements into empty array
+  if (userChoiceUpperChar) {
+    possibleCharOptions = possibleCharOptions.concat(letterOptionsUpper);
+  }
+    
+  // TODO: if user selects Okay to special characters than use specialCharOptions array and add elements into empty array
+  if (userChoiceNumber) {
+    possibleCharOptions = possibleCharOptions.concat(numberOptions);
+  }
+
+  // //TODO: for loop the amount of times for the length specified by usern to randomly select between the 3 arrays
+  let result = [];
+  for (var i = 0; i < userChoiceLength; i++) {  
+    var randomChar = possibleCharOptions[Math.floor(Math.random() * possibleCharOptions.length)];
+    console.log(randomChar);
+    result.push(randomChar);
+    console.log(result);
+  }
+
+  // brings characters from array to string without commas
+  return result.join('');
 }
+
 
 // Write password to the #password input
 function writePassword() {
-  // TODO: connect functions and double check password generated data
   var password = generatePassword();
   var passwordText = document.querySelector("#password");
-
   passwordText.value = password;
 
 }
 
 generateBtn.addEventListener("click", writePassword);
 // Add event listener to generate button
-generateBtn.addEventListener("click", generatePassword);
