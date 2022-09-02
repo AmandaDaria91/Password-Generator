@@ -98,6 +98,7 @@ function writePassword() {
   userChoiceUpperChar = null;
   userChoiceNumber = null;
   userChoiceLength = 0;
+  possibleCharOptions = [];
 }
 
 generateBtn.addEventListener("click", writePassword);
