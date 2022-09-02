@@ -26,55 +26,56 @@ function generatePassword () {
     return;
   }
 
-  //prompt user for special char inclusion using okay or cancel
-  var userChoiceSpecChar = confirm("Would you like special characters included?");
-
-  //prompt user for lower char inclusion using okay or cancel
-  var userChoiceLowerChar = confirm("Would you like lowercase letters included?");
-
-  //prompt user for upper char inclusion using okay or cancel
-  var userChoiceUpperChar = confirm("Would you like uppercase letters included?");
-
-  //prompt user for upper char inclusion using okay or cancel
-  var userChoiceNumber = confirm("Would you like numbers included?");
-
-  //user must select one character type 
-  if (!userChoiceSpecChar && !userChoiceLowerChar && !userChoiceUpperChar && !userChoiceNumber) {
-    alert("You must select one character type");
-    return;
-  }
-
-  // if user selects Okay to special characters than use specialCharOptions array and add elements into empty array
-  if (userChoiceSpecChar) {
-    possibleCharOptions = possibleCharOptions.concat(specialCharOptions);
-  }
-
-  // if user selects Okay to lower than use letterOptions array and add elements into empty array
-  if (userChoiceLowerChar) {
-    possibleCharOptions = possibleCharOptions.concat(letterOptionsLower);
-  }
-
-  //if user selects Okay to Upper than use letterOptions array and change value to upper and add elements into empty array
-  if (userChoiceUpperChar) {
-    possibleCharOptions = possibleCharOptions.concat(letterOptionsUpper);
-  }
+  else {
     
-  // if user selects Okay to special characters than use specialCharOptions array and add elements into empty array
-  if (userChoiceNumber) {
-    possibleCharOptions = possibleCharOptions.concat(numberOptions);
+    //prompt user for special char inclusion using okay or cancel
+    var userChoiceSpecChar = confirm("Would you like special characters included?");
+    // if user selects Okay to special characters than use specialCharOptions array and add elements into empty array
+    if (userChoiceSpecChar === true) {
+      possibleCharOptions = possibleCharOptions.concat(specialCharOptions);
+    }
+
+    //prompt user for lower char inclusion using okay or cancel
+    var userChoiceLowerChar = confirm("Would you like lowercase letters included?");
+    // if user selects Okay to lower than use letterOptions array and add elements into empty array
+    if (userChoiceLowerChar === true) {
+      possibleCharOptions = possibleCharOptions.concat(letterOptionsLower);
+    }
+
+    //prompt user for upper char inclusion using okay or cancel
+    var userChoiceUpperChar = confirm("Would you like uppercase letters included?");
+    //if user selects Okay to Upper than use letterOptions array and change value to upper and add elements into empty array
+    if (userChoiceUpperChar === true) {
+      possibleCharOptions = possibleCharOptions.concat(letterOptionsUpper);
+    }
+
+    //prompt user for upper char inclusion using okay or cancel
+    var userChoiceNumber = confirm("Would you like numbers included?");
+    // if user selects Okay to special characters than use specialCharOptions array and add elements into empty array
+    if (userChoiceNumber === true) {
+      possibleCharOptions = possibleCharOptions.concat(numberOptions);
+    }
+
+    //user must select one character type 
+    if (!userChoiceSpecChar && !userChoiceLowerChar && !userChoiceUpperChar && !userChoiceNumber) {
+      alert("You must select one character type");
+      return;
+    }
+
+    else {
+      // //for loop the amount of times for the length specified by usern to randomly select between the 3 arrays
+      let result = [];
+      for (var i = 0; i < userChoiceLength; i++) {  
+        var randomChar = possibleCharOptions[Math.floor(Math.random() * possibleCharOptions.length)];
+        console.log(randomChar);
+        result.push(randomChar);
+        console.log(result);
+      }
+      // brings characters from array to string without commas
+      return result.join('');
+    }
   }
 
-  // //for loop the amount of times for the length specified by usern to randomly select between the 3 arrays
-  let result = [];
-  for (var i = 0; i < userChoiceLength; i++) {  
-    var randomChar = possibleCharOptions[Math.floor(Math.random() * possibleCharOptions.length)];
-    console.log(randomChar);
-    result.push(randomChar);
-    console.log(result);
-  }
-
-  // brings characters from array to string without commas
-  return result.join('');
 }
 
 
